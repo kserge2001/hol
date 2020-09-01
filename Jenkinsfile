@@ -27,7 +27,9 @@ pipeline {
           checkout scm
           docker.withRegistry('', 'DockerRgistryID') {
           def customImage = docker.build("kserge2001/hol-pipeline:${env.BUILD_ID}")
+          def customImage1 = docker.build("kserge2001/hol-pipeline")
           customImage.push()
+          customImage1.push()
           }
     }
         
