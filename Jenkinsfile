@@ -1,7 +1,7 @@
 pipeline {
     agent any
     triggers {
-  pollSCM '* * * * *'
+  pollSCM '*/2 * * * *'
 }
     
     
@@ -34,7 +34,10 @@ pipeline {
           def customImage1 = docker.build("kserge2001/hol-pipeline")
           customImage.push()
           customImage1.push()
-          }
+
+
+
+}
     }
         
     }
