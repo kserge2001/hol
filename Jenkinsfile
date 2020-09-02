@@ -1,7 +1,7 @@
 pipeline {
     agent any
     triggers {
-  pollSCM '*/2 * * * *'
+  pollSCM '* * * * *'
 }
     
     
@@ -41,6 +41,11 @@ pipeline {
     }
         
     }
+}
+       stage ( 'deployment trigger'){
+          steps {
+	    build 'hol-CI'
+}
 }
   }
 }
