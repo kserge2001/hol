@@ -1,52 +1,23 @@
+
 pipeline {
-    agent any
-    triggers {
-  pollSCM '* * * * *'
-}
-    
-    
-    tools {
-        maven 'M2_HOME'
-    }
-    
-    stages {
+  agent any
+  stages {
+
+    stage('build') {
+      steps {
         
-       stage('build') {
-            steps {
-                echo 'Hello build'
-                sh 'mvn clean'
-                sh  'mvn install'
-                sh 'mvn package'
-            }
+       echo 'Stage 1'
         }
-        stage('test') {
-            steps {
-                sh 'mvn test'
-                
-            }
-        }
-        stage ('build and publish image') {
+      }
+    }
+
+    stage('test') {
       steps {
         script {
-          checkout scm
-          docker.withRegistry('', 'DockerRgistryID') {
-          def customImage = docker.build("kserge2001/hol-pipeline:${env.BUILD_ID}")
-          def customImage1 = docker.build("kserge2001/hol-pipeline")
-          customImage.push()
-          customImage1.push()
-
-
-
-}
+          echo 'Stage 2'
+        }
+      }
     }
-        
-    }
-}
-       stage ( 'deployment trigger'){
-          steps {
-	    build 'hol-CD'
-}
-}
+
   }
 }
-
